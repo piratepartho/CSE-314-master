@@ -121,7 +121,7 @@ public:
     }
 };
 
-vector<pll> moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+vector<pll> moves = {{1, 0}, {0, 1}, {-1,0}, {0, -1}};
 
 bool checkSolvable(vector<vl> &board)
 {
@@ -168,7 +168,7 @@ bool checkSolvable(vector<vl> &board)
 void solve()
 {
     calculateDistance = calculateManhattan;
-    // set<vector<vl>>visitedList;
+    set<vector<vl>>visitedList;
 
     ll gridSize;
     cin >> gridSize;
@@ -205,6 +205,7 @@ void solve()
     {
         Node *curr = q.top();
         q.pop();
+        visitedList.insert(curr->board);
         exploredNode++;
 
         if (calculateDistance(curr) == 0)
@@ -244,9 +245,12 @@ void solve()
                             }
                         }
                         swap(newBoard[i][j], newBoard[i - horizontal][j - vertical]);
-                        Node *newNode = new Node(newBoard, curr->numberOfMoves + 1, curr);
-                        q.push(newNode);
-                        expandedNode++;
+                        //to check if newBoard is already been expanded and explored
+                        if(visitedList.find(newBoard) == visitedList.end()){
+                            Node *newNode = new Node(newBoard, curr->numberOfMoves + 1, curr);
+                            q.push(newNode);
+                            expandedNode++;
+                        }
                     }
                 }
             }
