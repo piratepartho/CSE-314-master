@@ -1,0 +1,9 @@
+1. syscall function use kora
+2. defs.h notice na kora
+3. remembering all the places to edit for a new system call
+4. acquire and release lock. 
+------------
+amader methode dui tay to struct gula edit kortesi na. lock ki joruri???
+------------
+
+
